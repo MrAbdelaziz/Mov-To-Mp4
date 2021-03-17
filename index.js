@@ -47,8 +47,8 @@ app.post('/get_mp4',upload.single('file'),(req,res,next) => {
     if(req.file){
 
         var output = req.file.filename + ".mp4"
-
-        exec(`ffmpeg -i ${req.file.path} -qscale 0 ${output}`, (error, stdout, stderr) => {
+        // exec(`ffmpeg -i ${req.file.path} -qscale 0 ${output}`, (error, stdout, stderr) => {
+        exec(`ffmpeg -i test.mov -pix_fmt yuv420p -c:v hevc -x265-params crf=23 ${output}`, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
